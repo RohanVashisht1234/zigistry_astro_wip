@@ -1,32 +1,8 @@
-//!===============================================================
-//!         Search Engine Algorithm API "/api/searchPackages"
-//!===============================================================
-//!	Author  : Rohan Vashisht
-//! License : Please check license file
-//! Details : This api implements algorithm for search.
-//! The search query is expected to be received like this:
-//! /api/searchPackages?q=Search%20Query
-//!===============================================================
+// netlify/functions/searchPackages.js
+import mainDatabase from '../../../database/main.json';
 
-// ===================
-//       Imports
-// ===================
-
-// --------- Types -----------
-import Repo from "@/types/customTypes";
-import type { NextApiRequest, NextApiResponse } from "next";
-
-// --------- Database -----------
-import mainDatabase from "@/database/main.json";
-
-// =========================================
-//       Exports "/api/searchPackages"
-// =========================================
-export default async function search(
-  req: NextApiRequest,
-  res: NextApiResponse<Repo[]>,
-) {
-  const { q, filter } = req.query;
+exports.handler = async function (event: { queryStringParameters: { q: string; filter: string; }; }) {
+  const { q, filter } = event.queryStringParameters;
 
   // Check if the query parameter `q` exists and is a string
   if (!q || typeof q !== "string") {
@@ -37,7 +13,10 @@ export default async function search(
 
       return true;
     });
-    return res.status(200).json(searchResults);
+    return {
+      statusCode: 200,
+      body: JSON.stringify(searchResults)
+    };
   }
 
   const query = q.toLowerCase();
@@ -58,5 +37,8 @@ export default async function search(
     return true;
   });
 
-  return res.status(200).json(searchResults);
+  return {
+    statusCode: 200,
+    body: JSON.stringify(searchResults)
+  };
 }

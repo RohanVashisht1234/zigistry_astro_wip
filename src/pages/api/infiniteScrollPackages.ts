@@ -1,9 +1,16 @@
-// netlify/functions/infiniteScroll.js
-import databaseMain from '../../../database/main.json';
+import databaseMain from "../../../database/main.json";
 
-exports.handler = async function (event: { queryStringParameters: { pageNumber: string; }; }) {
+export async function GET({ params }: { params: { pageNumber: string } }) {
   // Extract and parse the page number from the query parameters.
-  const pageNumber = parseInt(event.queryStringParameters.pageNumber, 10);
+  if (!params.pageNumber) {
+    return new Response(JSON.stringify([]), {
+      status: 400,
+      headers: {
+        "Content-Type": "application/json",
+      }
+    });
+  }
+  const pageNumber = parseInt(params.pageNumber, 10);
 
   // Check if pageNumber is a valid number.
   if (!isNaN(pageNumber) && pageNumber >= 0) {
@@ -13,13 +20,17 @@ exports.handler = async function (event: { queryStringParameters: { pageNumber: 
     // Slice the array to get the results.
     const scrollResults = databaseMain.slice(lowerLimit, lowerLimit + 10);
 
-    return {
-      statusCode: 200,
-      body: JSON.stringify(scrollResults)
-    };
+    return new Response(JSON.stringify(scrollResults), {
+      status: 200,
+      headers: {
+        "Content-Type": "application/json",
+      }
+    });
   }
-  return {
-    statusCode: 400,
-    body: JSON.stringify([])
-  };
+  return new Response(JSON.stringify([]), {
+    status: 400,
+    headers: {
+      "Content-Type": "application/json",
+    }
+  });
 }

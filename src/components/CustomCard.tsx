@@ -13,7 +13,7 @@
 // ===================
 
 // ---------- Types ------------
-import type {Repo} from "../../types/customTypes";
+import type { Repo } from "../types/customTypes";
 import { SiCodeberg } from "react-icons/si";
 import { FaCheck } from "react-icons/fa";
 
