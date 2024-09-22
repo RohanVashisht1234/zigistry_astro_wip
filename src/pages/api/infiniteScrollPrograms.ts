@@ -1,27 +1,42 @@
-// netlify/functions/infiniteScrollProjects.js
-import databaseMain from '../../../database/main.json';
+import databaseMain from "../../../database/programs.json";
 
-exports.handler = async function (event: { queryStringParameters: { pageNumber: string; }; }) {
-  // Extract and parse the page number from the query parameters.
-  const pageNumber = parseInt(event.queryStringParameters.pageNumber, 10);
+export async function GET({ url }: { url: string }) {
+  const parsedUrl = new URL(url);
+  const pageNumberParam = parsedUrl.searchParams.get('pageNumber');
 
-  // Check if pageNumber is a valid number.
-  if (!isNaN(pageNumber) && pageNumber >= 0) {
-    {
-      // Calculate the slice indices.
-      const lowerLimit = pageNumber * 10;
+  // Log the incoming pageNumber
+  // console.log("Received pageNumber from query:", pageNumberParam);
 
-      // Slice the array to get the results.
-      const scrollResults = databaseMain.slice(lowerLimit, lowerLimit + 10);
+  // Ensure pageNumber is provided and is a valid number
+  const pageNumber = parseInt(pageNumberParam || '0', 10);
 
-      return {
-        statusCode: 200,
-        body: JSON.stringify(scrollResults)
-      }
-    };
+  // Log the parsed page number
+  console.log("Parsed page number:", pageNumber);
+
+  if (isNaN(pageNumber) || pageNumber < 0) {
+    console.log("Invalid page number:", pageNumber);
+    return new Response(JSON.stringify({ error: "Invalid page number" }), {
+      status: 400,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
   }
-  return {
-    statusCode: 400,
-    body: JSON.stringify([])
-  }
+
+  // Calculate the slice indices
+  const lowerLimit = pageNumber * 10;
+  console.log("Lower limit:", lowerLimit);
+
+  // Slice the array to get the results
+  const scrollResults = databaseMain.slice(lowerLimit, lowerLimit + 10);
+
+  // Log the results being returned
+  console.log("Scroll results:", scrollResults);
+
+  return new Response(JSON.stringify(scrollResults), {
+    status: 200,
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
 }

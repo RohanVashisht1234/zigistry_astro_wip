@@ -197,8 +197,8 @@ export default function IndexComponent(props: { top10LatestRepos: Repo[], mostUs
             ) : (
                 <section className="flex w-full flex-wrap justify-evenly">
                     {searchResultsData.length ? (
-                        searchResultsData.map((item) => (
-                            <CustomCard program={false} item={item} />
+                        searchResultsData.map((item, index) => (
+                            <CustomCard program={false} key={index} item={item} />
                         ))
                     ) : (
                         <h1>Can&apos;t find what you are looking for</h1>
