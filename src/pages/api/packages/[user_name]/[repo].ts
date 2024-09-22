@@ -1,23 +1,27 @@
-// netlify/functions/packages.js
-import mainDatabase from '../../../../../database/main.json';
+import mainDatabase from "../../../../../database/main.json";
 
-exports.handler = async function (event: { queryStringParameters: { user_name: string; repo: string; }; }) {
-    const { user_name, repo } = event.queryStringParameters;
+export async function GET({ params }: { params: { username: string; reponame: string } }) {
+  const { username, reponame } = params;
 
-    if (!user_name || typeof user_name !== "string" || !repo || typeof repo !== "string") {
-        return {
-            statusCode: 200,
-            body: JSON.stringify(null)
-        };
-    }
-    const full_name = user_name.toLowerCase() + "/" + repo.toLowerCase();
-
-    const searchResults = mainDatabase.filter((item) => {
-        return item.full_name.toLowerCase() == full_name;
+  // Validate that username and reponame are provided and are strings
+  if (!username || !reponame) {
+    return new Response(JSON.stringify(null), {
+      status: 200,
+      headers: {
+        "Content-Type": "application/json",
+      },
     });
+  }
 
-    return {
-        statusCode: 200,
-        body: JSON.stringify(searchResults[0])
-    };
+  const fullName = `${username.toLowerCase()}/${reponame.toLowerCase()}`;
+
+  // Search for the repository in the main database
+  const searchResults = mainDatabase.filter((item) => item.full_name.toLowerCase() === fullName);
+
+  return new Response(JSON.stringify(searchResults[0] || null), {
+    status: 200,
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
 }

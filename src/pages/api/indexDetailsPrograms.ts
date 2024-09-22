@@ -1,7 +1,7 @@
 // netlify/functions/indexDetailsPrograms.js
 import databaseMain from '../../../database/main.json';
 
-exports.handler = async function (event: { queryStringParameters: { section: string; range: string; }; }) {
+export async function GET(event: { queryStringParameters: { section: string; range: string; }; }) {
   {
     const { section, range } = event.queryStringParameters;
 

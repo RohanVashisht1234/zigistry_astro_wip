@@ -1,7 +1,7 @@
 // netlify/functions/indexDetailsPackages.js
 import databaseMain from '../../../database/main.json';
 
-exports.handler = async function (event: { queryStringParameters: { section: string; range: string; }; }) {
+export async function GET(event: { queryStringParameters: { section: string; range: string; }; }) {
   const { section, range } = event.queryStringParameters;
 
   if (
@@ -10,10 +10,11 @@ exports.handler = async function (event: { queryStringParameters: { section: str
     !range ||
     typeof range !== "string"
   ) {
-    return {
-      statusCode: 400,
-      body: JSON.stringify([])
-    };
+    return new Response(null, {
+      status: 400, headers: {
+        "Content-Type": "application/json",
+      },
+    });
   }
 
   const ranger = range.split("..");
@@ -21,10 +22,13 @@ exports.handler = async function (event: { queryStringParameters: { section: str
   const upperLimit = parseInt(ranger[1]);
 
   if (section == "mostUsed") {
-    return {
-      statusCode: 400,
-      body: JSON.stringify(databaseMain.slice(lowerLimit, upperLimit))
-    };
+    return new Response(JSON.stringify(databaseMain.slice(lowerLimit, upperLimit)),
+      {
+        status: 200,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
   } else if (section == "latestRepos") {
     const sortedRepos = databaseMain
       .slice()
@@ -32,14 +36,16 @@ exports.handler = async function (event: { queryStringParameters: { section: str
         (a, b) =>
           new Date(b.created_at).getTime() - new Date(a.created_at).getTime(),
       );
-    return {
-      statusCode: 400,
-      body: JSON.stringify(sortedRepos.slice(lowerLimit, upperLimit))
-    };
+    return new Response(JSON.stringify(sortedRepos.slice(lowerLimit, upperLimit)), {
+      status: 200, headers: {
+        "Content-Type": "application/json",
+      },
+    })
   }
 
-  return {
-    statusCode: 400,
-    body: JSON.stringify([])
-  };
+  return new Response(null, {
+    status: 400, headers: {
+      "Content-Type": "application/json",
+    },
+  });
 }
