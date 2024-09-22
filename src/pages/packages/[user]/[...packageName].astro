@@ -16,7 +16,7 @@ import zon2json from "z2j";
 import Image from "astro/components/Image.astro";
 import { numberAsLetters } from "../../../../backend/helperFunctions";
 import { Card, Badge, Tooltip, Button } from "flowbite-react";
-export const prerender = true;
+// export const prerender = true;
 export function getStaticPaths() {
 const repositories: Repo[] = [...data, ...data_game, ...data_gui, ...data_web];
   const result =  repositories.map((repo) => {

@@ -13,7 +13,7 @@ import dataBerg from "../../../../database/codebergPrograms.json";
 import zon2json from "z2j";
 import { numberAsLetters } from "../../../../backend/helperFunctions";
 import { Card, Badge, Tooltip, Button } from "flowbite-react";
-export const prerender = true;
+// export const prerender = true;
 export function getStaticPaths() {
 const repositories: Repo[] = [...data, ...dataBerg];
   const result =  repositories.map((repo) => {
