@@ -1,3 +1,4 @@
+import { useState } from "react";
 import zon2json from "z2j";
 import { highlight, zig } from "zilite";
 
@@ -10,7 +11,7 @@ export default function Z2j_app() {
     output.scrollTop = s2.scrollTop;
   }
 
-  // const [outputValue, set_outputValue] = useState("");
+  const [outputValue, set_outputValue] = useState("");
 
   function hotReload() {
     const actualEditor = document.getElementById(
@@ -24,7 +25,8 @@ export default function Z2j_app() {
     output.innerHTML = highlight(zig, answer);
     pseudoEditor.scrollTop = actualEditor.scrollTop;
     output.scrollTop = actualEditor.scrollTop;
-    // set_outputValue(answer);
+    set_outputValue(answer);
+    console.log("asdf" + outputValue);
   }
   return (
     <>
@@ -35,8 +37,8 @@ export default function Z2j_app() {
           <div
             id="pseudo_editor"
             className="absolute left-0 top-[102px] z-10 m-2 h-[calc(100vh-200px)] w-1/2 overflow-y-scroll text-wrap break-words rounded-lg bg-[#2a3038] p-4 text-left font-mono text-white"
-          > </div>
-          < textarea
+          ></div>
+          <textarea
             onScroll={scrollActualPseudoEditorTogether}
             wrap="hard"
             placeholder={"Paste/type Zon here"}
@@ -47,7 +49,7 @@ export default function Z2j_app() {
             autoCorrect="false"
             autoComplete="false"
             className="absolute  left-0 top-[102px]  z-20 m-2 h-[calc(100vh-200px)] w-1/2 border-r-2 border-white bg-transparent p-4 font-mono text-transparent caret-white"
-          > </textarea>
+          ></textarea>
         </div>
         < div id="output" className="ml-10 mr-2 mt-3 block h-[calc(100vh-200px)] w-1/2 overflow-y-scroll text-wrap break-words rounded-lg bg-[#263554] p-4 font-mono" >
           Get json here
