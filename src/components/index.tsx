@@ -84,11 +84,14 @@ export default function IndexComponent(props: { top10LatestRepos: Repo[], mostUs
         }
     };
 
-    const handleOnChange = (value: string) => {
+    const handleOnChange = (z: string) => {
         setDataInTextboxChanged(true);
-        setShowDefaultIndexPage(value === "");
-        setSearchTextboxInputValue(value);
-    };
+        if (z == "") {
+            setShowDefaultIndexPage(true);
+        } else {
+            setSearchTextboxInputValue(z);
+        }
+    }
 
     return (
         <>

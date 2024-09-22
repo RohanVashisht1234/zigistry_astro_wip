@@ -1,47 +1,27 @@
-# Astro Starter Kit: Minimal
+# Zigistry: A place where you can find all the libraries that suit your Zig lang needs.
 
-```sh
-npm create astro@latest -- --template minimal
-```
+<div align="center">
+<img width=500 src=https://github.com/user-attachments/assets/3b59cfad-049a-48dc-b55a-fa5bc433d686 />
+</div>
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/minimal)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/minimal)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/minimal/devcontainer.json)
+## How to add your zig library on this website?
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+- Just add a `zig-package` topic to your repository.
 
-## 🚀 Project Structure
+https://github.com/RohanVashisht1234/zigistry/assets/81112205/962b147c-16ce-44d8-a958-57c0f0e1447b
 
-Inside of your Astro project, you'll see the following folders and files:
+## How to write a blog on zigistry?
 
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+- Just type your blog [here](https://github.com/RohanVashisht1234/zigistry/discussions/6) and wait for it to get reviewed.
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## Support:
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+- ⭐ This github repo, create PRs, discussions, any sort of support/contribution is welcomed 😃.
 
-Any static assets, like images, can be placed in the `public/` directory.
+## Contributing:
 
-## 🧞 Commands
+- Feel free to create a PR, create discussions,
 
-All commands are run from the root of the project, from a terminal:
+## Legal:
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+The contents inside the database folder doesn't belong to me, the main.json file has been created/updated by parsing Github's APIs.
