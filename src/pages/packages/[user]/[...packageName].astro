@@ -11,7 +11,7 @@ import data from "../../../../database/main.json";
 import data_game from "../../../../database/games.json";
 import data_web from "../../../../database/web.json";
 import data_gui from "../../../../database/gui.json";
-// import DOMPurify from "isomorphic-dompurify";
+import DOMPurify from "isomorphic-dompurify";
 import zon2json from "z2j";
 import { numberAsLetters } from "../../../../backend/helperFunctions";
 import { Card, Badge, Tooltip, Button } from "flowbite-react";
@@ -293,7 +293,7 @@ const compressedRepo: Repo = {
                 class="readmeDiv"
                 set:html={
                    compressedRepo.readme_content 
-                    ? compressedRepo.readme_content
+                    ? DOMPurify.sanitize(compressedRepo.readme_content)
                     : ""
                 }
               ></div>

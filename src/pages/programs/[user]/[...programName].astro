@@ -6,10 +6,10 @@ import { GoIssueOpened } from "react-icons/go";
 import { FaCodeFork, FaEye, FaStar } from "react-icons/fa6";
 import { FaGithub } from "react-icons/fa";
 import { BsInfoSquareFill } from "react-icons/bs";
+import DOMPurify from "isomorphic-dompurify";
 import RootLayout from "../../../layouts/main.astro";
 import data from "../../../../database/programs.json";
 import dataBerg from "../../../../database/codebergPrograms.json";
-// import DOMPurify from "isomorphic-dompurify";
 import zon2json from "z2j";
 import { numberAsLetters } from "../../../../backend/helperFunctions";
 import { Card, Badge, Tooltip, Button } from "flowbite-react";
@@ -291,7 +291,7 @@ const compressedRepo: Repo = {
                 class="readmeDiv"
                 set:html={
                    compressedRepo.readme_content 
-                    ? compressedRepo.readme_content
+                    ? DOMPurify.sanitize(compressedRepo.readme_content)
                     : ""
                 }
               ></div>
